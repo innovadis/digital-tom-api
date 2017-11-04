@@ -1,0 +1,3 @@
+type Mutation {
+  log(event: String, message: String): Boolean
+}

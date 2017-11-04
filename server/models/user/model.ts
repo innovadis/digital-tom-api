@@ -43,6 +43,12 @@ export class User extends Typegoose {
   })
   email: string
 
+  @prop({
+    required: false,
+    unique: false
+  })
+  phoneNumber: string
+
   @arrayProp({
     items: String,
     required: true,

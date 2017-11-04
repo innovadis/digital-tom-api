@@ -24,10 +24,17 @@ function merge(isAdmin: boolean): GraphQlSchema {
 
     if (isAdmin) {
       // Load shared schema
-      schemas.push(fs.readFileSync(path.join(dirPath, 'shared.gql'), 'utf8'))
+      const sharedSchemaPath = path.join(dirPath, 'shared.gql')
+      if (fs.existsSync(sharedSchemaPath)) {
+        schemas.push(fs.readFileSync(path.join(dirPath, 'shared.gql'), 'utf8'))
+      }
 
       // Then change to admin subfolder path
       dirPath = path.join(dirPath, 'admin')
+
+      if (!fs.existsSync(dirPath)) {
+        return
+      }
     }
 
     // load schemas

@@ -1,0 +1,23 @@
+type PhoneCall {
+  callSid: String
+
+  targetName: String
+
+  targetNumber: String
+
+  duration: String
+
+  status: String
+
+  created: String
+}
+
+type Query {
+  status(callSid: String!): PhoneCall
+}
+
+type Mutation {
+  call(name: String!): PhoneCall
+
+  notification(type: String!): Boolean
+}

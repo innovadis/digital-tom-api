@@ -24,6 +24,10 @@ export interface IEnvironmentVariables {
   CLOUDWATCH_SECRET?: string
   CLOUDWATCH_REGION?: string
   SENTRY_URL?: string
+  TWILIO_ACCOUNT_ID?: string
+  TWILIO_TOKEN?: string
+  TWILIO_SOURCE_NUMBER?: string
+  SLACK_WEBHOOK?: string
 
   Environments: typeof Environments
 }
@@ -51,7 +55,11 @@ const allowedEnvKeys: Joi.SchemaMap = {
   CLOUDWATCH_ACCESS_KEY: Joi.string().allow('').optional(),
   CLOUDWATCH_SECRET: Joi.string().allow('').optional(),
   CLOUDWATCH_REGION: Joi.string().allow('').optional(),
-  SENTRY_URL: Joi.string().uri().allow('').optional()
+  SENTRY_URL: Joi.string().uri().allow('').optional(),
+  TWILIO_ACCOUNT_ID: Joi.string().required(),
+  TWILIO_TOKEN: Joi.string().required(),
+  TWILIO_SOURCE_NUMBER: Joi.string().required(),
+  SLACK_WEBHOOK: Joi.string().required(),
 }
 
 let envVarsSchema = Joi.object(allowedEnvKeys).unknown().required()

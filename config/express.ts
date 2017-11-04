@@ -20,11 +20,12 @@ import publicRoutes from 'server/public_routes'
 import { graphQlRoute, graphQlAdminRoute } from 'config/graphql'
 
 let app: Express
+let router
 
 (async () => {
   app = express()
 
-  const router = expressPromiseRouter()
+  router = expressPromiseRouter()
 
   if (env.NODE_ENV === env.Environments.Development) {
     app.use(Morgan('dev')) // HTTP request logging
@@ -172,5 +173,9 @@ let app: Express
     console.log('Express: Loaded')
   }
 })()
+
+export {
+  router
+}
 
 export default app
