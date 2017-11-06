@@ -11,8 +11,6 @@ router.get('/forest/speech', Liana.ensureAuthenticated, async function (req, res
     logStreamName: '2017-11-04' // TODO
   }).promise()
 
-  console.log(result.events)
-
   const speech = result.events
     .filter(x => {
       const anyEvent = JSON.parse(x.message)
