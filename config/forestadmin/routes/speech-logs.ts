@@ -1,5 +1,6 @@
 import * as Liana from 'forest-express-mongoose'
 import AWS from 'config/aws'
+import * as Moment from 'moment'
 
 import { router } from 'config/express'
 
@@ -8,7 +9,7 @@ const logs = new AWS.CloudWatchLogs()
 router.get('/forest/speech', Liana.ensureAuthenticated, async function (req, res) {
   const result = await logs.getLogEvents({
     logGroupName: 'digital-tom',
-    logStreamName: '2017-11-04' // TODO
+    logStreamName: Moment().format('YYYY-MM-DD') // TODO
   }).promise()
 
   const speech = result.events
