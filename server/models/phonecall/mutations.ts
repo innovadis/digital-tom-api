@@ -62,7 +62,7 @@ export async function call(args: ICallArgs): Promise<PhoneCall> {
       url: 'https://app.digitalereceptionist.nl/static/twilio/person_waiting.xml',
       to: targetUser.phoneNumber,
       from: '+' + env.TWILIO_SOURCE_NUMBER,
-      statusCallback: 'https://api.digitalereceptionist.nl/api/v1/phone/callstatus-callback'
+      statusCallback: 'https://api.digitalereceptionist.nl/external/twilio-callback'
     })
 
     call.callSid = callResponse.sid
