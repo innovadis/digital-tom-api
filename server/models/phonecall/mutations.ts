@@ -27,6 +27,12 @@ export interface INotificationArgs {
   type: string
 }
 
+export interface ITwilioCall {
+  CallSid: string
+  CallStatus: string
+  Duration: number
+}
+
 export const callValidation: ICallArgs = {
   name: Joi.string().required() as any
 }
@@ -86,6 +92,29 @@ export async function notification(args: INotificationArgs): Promise<void> {
   } else if (args.type === NOTIFICATION_TYPES.NoAnswer) {
     sendSlackMessage('Er staat iemand beneden die probeerde te bellen via mij maar niemand nam op :slightly_frowning_face:\n\nKan iemand kijken of er beneden iemand staat te wachten? Hij heeft wel gezien dat hij naar deze verdieping kan lopen.')
   }
+}
+
+export async function twilioCallback(twilioCall: ITwilioCall): Promise<boolean> {
+
+  // TODO check twilio security token
+  const call = await PhoneCallModel.findOne({
+    callSid: twilioCall.CallSid
+  })
+
+  if (!call) {
+    logger.error(`call with sid ${twilioCall.CallSid} not found`)
+
+    return false
+  }
+
+  call.status = twilioCall.CallStatus
+  call.duration = twilioCall.Duration
+
+  await call.save()
+
+  logger.info(`set call status with sid ${call.callSid} to: ${call.status}`)
+
+  return true
 }
 
 // Note to self:

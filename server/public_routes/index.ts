@@ -10,4 +10,7 @@ router.use('/misc', rateLimiter.middleware(), miscRoutes)
 import authRoutes from './auth'
 router.use('/auth', rateLimiter.middleware(), authRoutes)
 
+import externalRoutes from './external'
+router.use('/external', externalRoutes)
+
 export default router
