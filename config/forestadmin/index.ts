@@ -2,6 +2,11 @@ import env from 'config/env'
 import * as fs from 'fs'
 import * as path from 'path'
 
+let extension = '.js'
+if (env.DEBUG) {
+  extension = '.ts'
+}
+
 module.exports = function (expressApp) {
   if (env.NODE_ENV !== env.Environments.Test) {
     if (!env.FOREST_AUTH_SECRET || !env.FOREST_ENV_SECRET) {
@@ -16,16 +21,19 @@ module.exports = function (expressApp) {
     }))
 
     const collectionsDir = path.join(__dirname, 'collections')
-    // const routesDir = path.join(__dirname, 'routes')
+    const routesDir = path.join(__dirname, 'routes')
 
     for (const file of fs.readdirSync(collectionsDir)) {
-      console.log(file)
-      require(path.join(collectionsDir, file))
+      if (file.endsWith(extension)) {
+        require(path.join(collectionsDir, file))
+      }
     }
 
-    // for (const file of fs.readdirSync(routesDir)) {
-    //   require(path.join(routesDir, file))
-    // }
+    for (const file of fs.readdirSync(routesDir)) {
+      if (file.endsWith(extension)) {
+        require(path.join(routesDir, file))
+      }
+    }
 
     console.log('Forest Admin: Loaded')
   }
