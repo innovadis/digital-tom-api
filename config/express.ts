@@ -22,7 +22,7 @@ import { graphQlRoute, graphQlAdminRoute } from 'config/graphql'
 let app: Express
 let router
 
-(async () => {
+;(async () => {
   app = express()
 
   router = expressPromiseRouter()
@@ -40,7 +40,7 @@ let router
   app.use(helmet()) // Secure apps by setting various HTTP headers
 
   // Load Forest Admin
-  require('config/forestadmin')(app)
+  // require('config/forestadmin')(app)
 
   // Enable CORS - Cross Origin Resource Sharing
   if (env.NODE_ENV === env.Environments.Production) {
@@ -60,14 +60,14 @@ let router
 
   // Private GraphQL routes, require authentication
 
-  if (env.NODE_ENV === env.Environments.Development) {
-    app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
-    app.use('/admin-graphiql', graphiqlExpress({ endpointURL: '/admin-graphql' }))
-  }
+  // if (env.NODE_ENV === env.Environments.Development) {
+  //   app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
+  //   app.use('/admin-graphiql', graphiqlExpress({ endpointURL: '/admin-graphql' }))
+  // }
 
-  router.use('/graphql', bodyParser.json(), checkAuthentication, graphQlRoute)
-  router.use('/admin-graphql', bodyParser.json(), checkAuthentication, checkAdminRole, graphQlAdminRoute)
-  app.use('/', router)
+  // router.use('/graphql', bodyParser.json(), checkAuthentication, graphQlRoute)
+  // router.use('/admin-graphql', bodyParser.json(), checkAuthentication, checkAdminRole, graphQlAdminRoute)
+  // app.use('/', router)
 
   // Enable detailed API logging
   if (env.NODE_ENV !== env.Environments.Test) {
