@@ -40,7 +40,7 @@ let router
   app.use(helmet()) // Secure apps by setting various HTTP headers
 
   // Load Forest Admin
-  // require('config/forestadmin')(app)
+  require('config/forestadmin')(app)
 
   // Enable CORS - Cross Origin Resource Sharing
   if (env.NODE_ENV === env.Environments.Production) {
@@ -49,8 +49,6 @@ let router
     //   origin: [], // TODO add origins for production
     //   optionsSuccessStatus: 200
     // }))
-
-    // Enable Forest Admin (must be done before express error handlers)
   } else {
     app.use(cors())
   }
