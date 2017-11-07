@@ -15,16 +15,16 @@ module.exports = function (expressApp) {
       mongoose: require('mongoose')
     }))
 
-    // const collectionsDir = path.join(__dirname, 'collections')
-    // const routesDir = path.join(__dirname, 'routes')
+    const collectionsDir = path.join(__dirname, 'collections')
+    const routesDir = path.join(__dirname, 'routes')
 
-    // for (const file of fs.readdirSync(collectionsDir)) {
-    //   require(path.join(collectionsDir, file))
-    // }
+    for (const file of fs.readdirSync(collectionsDir)) {
+      require(path.join(collectionsDir, file))
+    }
 
-    // for (const file of fs.readdirSync(routesDir)) {
-    //   require(path.join(routesDir, file))
-    // }
+    for (const file of fs.readdirSync(routesDir)) {
+      require(path.join(routesDir, file))
+    }
 
     console.log('Forest Admin: Loaded')
   }
