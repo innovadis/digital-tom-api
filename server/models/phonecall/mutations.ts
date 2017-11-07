@@ -10,6 +10,7 @@ import * as query from './query'
 import * as mongoose from 'mongoose'
 import * as Twilio from 'twilio'
 import { sendSlackMessage } from 'server/helpers/slack'
+import * as httpStatus from 'http-status'
 
 const TwilioClient = Twilio(env.TWILIO_ACCOUNT_ID, env.TWILIO_TOKEN)
 

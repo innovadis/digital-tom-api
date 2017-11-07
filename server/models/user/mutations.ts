@@ -5,6 +5,7 @@ import * as Joi from 'joi'
 import { APIError } from 'server/helpers/error'
 import * as query from './query'
 import * as mongoose from 'mongoose'
+import * as httpStatus from 'http-status'
 
 export interface IAddUserArgs {
   name: string
