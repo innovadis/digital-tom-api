@@ -22,7 +22,7 @@ import { graphQlRoute, graphQlAdminRoute } from 'config/graphql'
 let app: Express
 let router
 
-(async () => {
+;(async () => {
   app = express()
 
   router = expressPromiseRouter()
@@ -49,8 +49,6 @@ let router
     //   origin: [], // TODO add origins for production
     //   optionsSuccessStatus: 200
     // }))
-
-    // Enable Forest Admin (must be done before express error handlers)
   } else {
     app.use(cors())
   }
