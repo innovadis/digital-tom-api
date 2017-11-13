@@ -38,7 +38,7 @@ function _generateToken(user: User): string {
   }
 
   return JWT.sign(jwtUser, env.JWT_SECRET, {
-    expiresIn: '7d'
+    expiresIn: '365d'
   })
 }
 
