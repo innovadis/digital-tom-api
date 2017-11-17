@@ -59,7 +59,8 @@ export async function call(args: ICallArgs): Promise<PhoneCall> {
   let callResponse
   if (env.NODE_ENV === env.Environments.Production) {
     callResponse = await TwilioClient.calls.create({
-      url: 'https://app.digitalereceptionist.nl/static/twilio/person_waiting.xml',
+      // url: 'https://app.digitalereceptionist.nl/static/twilio/person_waiting.xml',
+      url: 'http://demo.twilio.com/docs/voice.xml',
       to: targetUser.phoneNumber,
       from: '+' + env.TWILIO_SOURCE_NUMBER,
       statusCallback: 'https://api.digitalereceptionist.nl/external/twilio-callback'
