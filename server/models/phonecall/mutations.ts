@@ -59,11 +59,11 @@ export async function call(args: ICallArgs): Promise<PhoneCall> {
   let callResponse
   if (env.NODE_ENV === env.Environments.Production) {
     callResponse = await TwilioClient.calls.create({
-      // url: 'https://app.digitalereceptionist.nl/static/twilio/person_waiting.xml',
-      url: 'http://demo.twilio.com/docs/voice.xml',
+      url: 'https://s3.eu-central-1.amazonaws.com/digital-tom/person_waiting.xml',
       to: targetUser.phoneNumber,
       from: '+' + env.TWILIO_SOURCE_NUMBER,
-      statusCallback: 'https://api.digitalereceptionist.nl/external/twilio-callback'
+      statusCallback: 'https://api.digitalereceptionist.nl/external/twilio-callback',
+      method: 'GET'
     })
 
     call.callSid = callResponse.sid
