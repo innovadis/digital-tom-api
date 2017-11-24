@@ -13,4 +13,13 @@ router.route('/twilio-callback')
     res.sendStatus(httpStatus.BAD_REQUEST)
   })
 
+/** POST /external/slack-callback */
+router.route('/slack-callback')
+  .post(async (req, res) => {
+
+    console.log(req.body)
+
+    res.sendStatus(httpStatus.OK)
+  })
+
 export default router
