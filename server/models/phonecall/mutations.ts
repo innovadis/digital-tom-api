@@ -89,9 +89,45 @@ export async function notification(args: INotificationArgs): Promise<void> {
   validate(args, notificationValidation)
 
   if (args.type === NOTIFICATION_TYPES.Package) {
-    sendSlackMessage('De bezorger heeft een pakketje achtergelaten op de balie van de receptie. :tada:\n\nKan iemand die ophalen?')
+    sendSlackMessage(
+      'De bezorger heeft een pakketje achtergelaten op de balie van de receptie. :tada:\n\nKan iemand die ophalen?',
+      [
+        {
+          text: 'Ga jij het ophalen? Geef het aan zodat je collega\'s niet voor niets gaan',
+          callback_id: 'package_confirm',
+          color: '#0029a8',
+          attachment_type: 'default',
+          actions: [
+            {
+              name: 'confirm',
+              text: 'Ik haal het op!',
+              type: 'button',
+              value: true
+            }
+          ]
+        }
+      ]
+    )
   } else if (args.type === NOTIFICATION_TYPES.NoAnswer) {
-    sendSlackMessage('Er staat iemand beneden die probeerde te bellen via mij maar niemand nam op :slightly_frowning_face:\n\nKan iemand kijken of er beneden iemand staat te wachten? Hij heeft wel gezien dat hij naar deze verdieping kan lopen.')
+    sendSlackMessage(
+      'Er staat iemand beneden die probeerde te bellen via mij maar niemand nam op :slightly_frowning_face:\n\nKan iemand kijken of er beneden iemand staat te wachten? Hij heeft wel gezien dat hij naar deze verdieping kan lopen.',
+      [
+        {
+          text: 'Ga jij kijken? Geef het aan zodat je collega\'s niet ook gaan',
+          callback_id: 'noanswer_confirm',
+          color: '#0029a8',
+          attachment_type: 'default',
+          actions: [
+            {
+              name: 'confirm',
+              text: 'Ik ben onderweg!',
+              type: 'button',
+              value: true
+            }
+          ]
+        }
+      ]
+    )
   }
 }
 
